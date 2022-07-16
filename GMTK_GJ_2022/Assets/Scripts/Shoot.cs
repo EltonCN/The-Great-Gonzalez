@@ -8,6 +8,8 @@ public class Shoot : MonoBehaviour
     [SerializeField] GameObject objectPrefab;
     [SerializeField] Transform origin;
     [SerializeField] float velocity;
+    [SerializeField] Rigidbody shooterVelocityReference;
+    [SerializeField] bool randomizeRotation = true;
 
     // Start is called before the first frame update
     void Start()
@@ -31,15 +33,32 @@ public class Shoot : MonoBehaviour
             return;
         }
 
-        GameObject go = Instantiate(objectPrefab, origin.position, origin.rotation);
+        Quaternion rotation = origin.rotation;
+        if(randomizeRotation)
+        {
+            Vector3 angles = new Vector3();
+            angles.x = Random.Range(0,360);
+            angles.y = Random.Range(0,360);
+            angles.z = Random.Range(0,360);
+
+            rotation.eulerAngles = angles;
+        }
+
+        GameObject go = Instantiate(objectPrefab, origin.position, rotation);
         Rigidbody rb = go.GetComponent<Rigidbody>();
        
 
         Vector3 direction  = origin.position-Camera.main.transform.position;
         direction.Normalize();
 
+        float realVelocity = velocity;
 
-        rb.velocity = velocity*direction;
+        if(shooterVelocityReference != null)
+        {
+            realVelocity += shooterVelocityReference.velocity.magnitude;
+        }
+        
+        rb.velocity = realVelocity*direction;
 
         
     }
