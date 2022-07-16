@@ -6,11 +6,15 @@ using UnityEngine;
 public class Dice : MonoBehaviour
 {
     [SerializeField] List<DiceFace> faces;
+    [SerializeField] List<GameObject> numberSprites;
+    [SerializeField] GameObject body;
     [SerializeField] float[] info;
     [SerializeField] float movingMinimumVelocity = 0.01f;
     [SerializeField] bool destroyOnInteraction = true;
     [SerializeField] bool destroyOnStop = true;
-    [SerializeField] float destroyOnStopDelay = 0.5f;
+    [SerializeField] float bodyHideDelay = 0.5f;
+    [SerializeField] float destroyDelay = 1.45f;
+    [SerializeField] bool showNumberOnDestroy = true;
     
     bool interact = true;
     float movingMinimumVelocity2;
@@ -35,7 +39,7 @@ public class Dice : MonoBehaviour
 
         if(destroyOnStop && !moving)
         {
-            Destroy(this.gameObject);
+            StartCoroutine(DestroyOnStop());
         }
     }
 
@@ -67,6 +71,7 @@ public class Dice : MonoBehaviour
 
             info[face.FaceNumber-1] = UpCoeficient;
         }
+
 
         return number;
     }
@@ -110,18 +115,25 @@ public class Dice : MonoBehaviour
 
         if(this.destroyOnInteraction)
         {
-            Destroy(this.gameObject);
-            interact = false;
+            StartCoroutine(DestroyOnStop());
         }
     
     }
 
     IEnumerator DestroyOnStop()
     {
-        if(destroyOnStopDelay > 0)
-        {
-            yield return new WaitForSeconds(destroyOnStopDelay);
-        }
+        interact = false;
+        
+        int index = getNumber()-1;
+
+        numberSprites[index].SetActive(true);
+
+        yield return new WaitForSeconds(bodyHideDelay);
+
+        body.SetActive(false);
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        yield return new WaitForSeconds(destroyDelay);
 
         Destroy(this.gameObject);
     }
