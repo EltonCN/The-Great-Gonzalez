@@ -7,7 +7,12 @@ public class Dice : MonoBehaviour
 {
     [SerializeField] List<DiceFace> faces;
     [SerializeField] float[] info;
-    [SerializeField] float movingMinimumVelocity = 0.1f;
+    [SerializeField] float movingMinimumVelocity = 0.01f;
+    [SerializeField] bool destroyOnInteraction = true;
+    [SerializeField] bool destroyOnStop = true;
+    [SerializeField] float destroyOnStopDelay = 0.5f;
+    
+    bool interact = true;
     float movingMinimumVelocity2;
 
     Rigidbody rb;
@@ -27,6 +32,11 @@ public class Dice : MonoBehaviour
     void Update()
     {
         checkMoving();
+
+        if(destroyOnStop && !moving)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void checkMoving()
@@ -72,5 +82,47 @@ public class Dice : MonoBehaviour
         {
             return moving;
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(!interact)
+        {
+            return;
+        }
+
+        Rigidbody rb = other.attachedRigidbody;
+
+        if(rb == null)
+        {
+            return;
+        }
+
+        DiceInteraction di = rb.GetComponent<DiceInteraction>();
+        
+        
+        if(di == null && this.destroyOnInteraction)
+        {
+            return;
+        }
+
+        di.Interact(getNumber());
+
+        if(this.destroyOnInteraction)
+        {
+            Destroy(this.gameObject);
+            interact = false;
+        }
+    
+    }
+
+    IEnumerator DestroyOnStop()
+    {
+        if(destroyOnStopDelay > 0)
+        {
+            yield return new WaitForSeconds(destroyOnStopDelay);
+        }
+
+        Destroy(this.gameObject);
     }
 }
