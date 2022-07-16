@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float horizontalVelocity;
+    [SerializeField] Transform forwardReference;
     PlayerControls controls;
+    
 
     Rigidbody rb;
     // Start is called before the first frame update
@@ -24,10 +26,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 input = controls.Default.Move.ReadValue<Vector2>();
         input *= horizontalVelocity;
 
-        Vector3 velocity = Vector3.zero;
-
-        velocity.x = input.x;
-        velocity.z = input.y;
+        Vector3 velocity = ( forwardReference.right * input.x + forwardReference.forward * input.y );
 
         rb.velocity = velocity;
     }

@@ -35,6 +35,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e7da4e7-3dbf-4467-8571-bb2b309d5d82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""735fa064-7a05-4119-b4de-1844338ce88f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +121,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Default
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
+        m_Default_Shoot = m_Default.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,11 +182,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Default;
     private IDefaultActions m_DefaultActionsCallbackInterface;
     private readonly InputAction m_Default_Move;
+    private readonly InputAction m_Default_Shoot;
     public struct DefaultActions
     {
         private @PlayerControls m_Wrapper;
         public DefaultActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Default_Move;
+        public InputAction @Shoot => m_Wrapper.m_Default_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -178,6 +201,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnMove;
+                @Shoot.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -185,6 +211,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -192,5 +221,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IDefaultActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }
