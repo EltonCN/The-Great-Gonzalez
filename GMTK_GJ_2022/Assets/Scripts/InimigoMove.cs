@@ -20,7 +20,6 @@ public class InimigoMove : MonoBehaviour
     void Start()
     {
         ultimo_ataque = 0;
-        rb = GetComponent<Rigidbody>();
 
         originalPosition = new Vector3();
         originalPosition.x = transform.position.x;
