@@ -1760,10 +1760,11 @@ MonoBehaviour:
   - {fileID: 2060366503}
   - {fileID: 1375991120}
   body: {fileID: 2509670252007576296}
-  info: []
   movingMinimumVelocity: 0.1
   destroyOnInteraction: 1
   destroyOnStop: 1
   bodyHideDelay: 0.5
   destroyDelay: 2.5
   showNumberOnDestroy: 1
+  explode: 0
+  explodeRange: 4

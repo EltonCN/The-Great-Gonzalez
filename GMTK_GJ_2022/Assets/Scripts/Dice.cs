@@ -8,15 +8,14 @@ public class Dice : MonoBehaviour
     [SerializeField] List<DiceFace> faces;
     [SerializeField] List<GameObject> numberSprites;
     [SerializeField] GameObject body;
-    [SerializeField] float[] info;
     [SerializeField] float movingMinimumVelocity = 0.01f;
     [SerializeField] bool destroyOnInteraction = true;
     [SerializeField] bool destroyOnStop = true;
     [SerializeField] float bodyHideDelay = 0.5f;
     [SerializeField] float destroyDelay = 1.45f;
     [SerializeField] bool showNumberOnDestroy = true;
-    
     [SerializeField] bool explode = false;
+    [SerializeField] float explodeRange = 4f;
     bool interact = true;
     float movingMinimumVelocity2;
 
@@ -26,7 +25,6 @@ public class Dice : MonoBehaviour
 
     void Start()
     {
-        info = new float[6];
         moving = false;
         movingMinimumVelocity2 = movingMinimumVelocity*movingMinimumVelocity;
 
@@ -70,8 +68,6 @@ public class Dice : MonoBehaviour
                 maximumCoeficient = UpCoeficient;
                 number = face.FaceNumber;
             }
-
-            info[face.FaceNumber-1] = UpCoeficient;
         }
 
 
@@ -98,46 +94,67 @@ public class Dice : MonoBehaviour
             return;
         }
 
-        if(explode == true){
-            Explodir();
+        int number = getNumber();
+        bool interacted = false;
+
+        if(explode == true)
+        {
+            interacted = Explode(number);
         }
-        else{
-            Rigidbody rb = other.attachedRigidbody;
-            DiceInteraction di = null;
-            if(rb != null)
-            {
-                di = rb.GetComponent<DiceInteraction>();
-            }
-            else
-            {
-                di = other.GetComponent<DiceInteraction>();
-            }
-
+        else
+        {
+            interacted = interactWith(other, number);
             
-            
-            
-            if(di == null && this.destroyOnInteraction)
-            {
-                return;
-            }
+        }
 
-            di.Interact(getNumber());
-
-            if(this.destroyOnInteraction)
-            {
-                StartCoroutine(DestroyOnStop());
-                interact = false;
-            }
+        if(this.destroyOnInteraction && interacted)
+        {
+            StartCoroutine(DestroyOnStop());
+            interact = false;
         }
     
     }
 
-    void Explodir(){
-        explode = false;
-        Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 4);
-        foreach (var hitCollider in hitColliders){
-            OnTriggerEnter(hitCollider);
+    bool interactWith(Collider other, int number)
+    {
+        Rigidbody rb = other.attachedRigidbody;
+        DiceInteraction di = null;
+        if(rb != null)
+        {
+            di = rb.GetComponent<DiceInteraction>();
         }
+        else
+        {
+            di = other.GetComponent<DiceInteraction>();
+        }
+        
+        if(di == null)
+        {
+            return false;
+        }
+
+        di.Interact(number);
+
+        return true;
+
+    }
+
+    bool Explode(int number)
+    {
+        explode = false;
+        Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, explodeRange);
+
+        bool interacted = false;
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            bool interactedWithThis = interactWith(hitCollider, number);
+
+            interacted = interactedWithThis || interacted;
+            
+        }
+
+        return interacted;
 
     }
 
