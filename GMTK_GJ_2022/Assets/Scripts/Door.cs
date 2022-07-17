@@ -25,12 +25,12 @@ public class Door : MonoBehaviour
 
     public void Close()
     {
-        updateClosed(false);
+        updateClosed(true);
     }
 
     public void Open(int porta)
     {
-        Debug.Log("aaa");
+        updateClosed(false);
     }
 
     void OnValidate()
@@ -38,26 +38,34 @@ public class Door : MonoBehaviour
         updateClosed(closed, true);
     }
 
-    void OnTriggerEnter(Collider objeto){
-        if (objeto.gameObject.name == "Player"){
-            if (closed == false){
-                objeto.transform.position = outra_porta.transform.position;
-            }
-            print("hahahahhaha");
-            
-        }
-        else if (objeto.gameObject.name == "Cube"){
-            Debug.Log("aaaaa");
-            updateClosed(false);
-        }
-        porta_tp = outra_porta;
-        
-    }
-
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-       
-            
+        //if(objeto.tag == "Player")
+        //{
+            if (closed == false)
+            {
+                Rigidbody rb = other.attachedRigidbody;
+                
+                if(rb == null)
+                {
+                    other.transform.position = outra_porta.transform.position;
+                    updateClosed(true);
+                }
+                else
+                {
+                    rb.transform.position = outra_porta.transform.position;
+                
+                    if(rb.tag != "Dice")
+                    {
+                        updateClosed(true);
+                    }
+                }
+
+                
+            }
+        //}
+
+        porta_tp = outra_porta; 
     }
 
     void updateClosed(bool newClosedState, bool force=false)

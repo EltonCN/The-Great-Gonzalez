@@ -40,6 +40,7 @@ public class Dice : MonoBehaviour
         if(destroyOnStop && !moving)
         {
             StartCoroutine(DestroyOnStop());
+            interact = false;
         }
     }
 
@@ -97,13 +98,17 @@ public class Dice : MonoBehaviour
         }
 
         Rigidbody rb = other.attachedRigidbody;
-
-        if(rb == null)
+        DiceInteraction di = null;
+        if(rb != null)
         {
-            return;
+            di = rb.GetComponent<DiceInteraction>();
+        }
+        else
+        {
+            di = other.GetComponent<DiceInteraction>();
         }
 
-        DiceInteraction di = rb.GetComponent<DiceInteraction>();
+        
         
         
         if(di == null && this.destroyOnInteraction)
@@ -116,12 +121,18 @@ public class Dice : MonoBehaviour
         if(this.destroyOnInteraction)
         {
             StartCoroutine(DestroyOnStop());
+            interact = false;
         }
     
     }
 
     IEnumerator DestroyOnStop()
     {
+        if(!interact)
+        {
+            yield break;
+        }
+
         interact = false;
         
         int index = getNumber()-1;
