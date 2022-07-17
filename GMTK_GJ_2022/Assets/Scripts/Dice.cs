@@ -137,9 +137,13 @@ public class Dice : MonoBehaviour
         
         int index = getNumber()-1;
 
-        if(showNumberOnDestroy)
+        if(showNumberOnDestroy && numberSprites.Count>index)
         {
-            numberSprites[index].SetActive(true);
+            if(numberSprites[index] != null)
+            {
+                numberSprites[index].SetActive(true);
+            }
+            
         }
         
 

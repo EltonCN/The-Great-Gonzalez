@@ -29,7 +29,10 @@ public class Shoot : MonoBehaviour
 
     public void shootObject(InputAction.CallbackContext context)
     {
-
+        if(!this.isActiveAndEnabled)
+        {
+            return;
+        }
         if(context.phase != InputActionPhase.Performed)
         {
             return;
