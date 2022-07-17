@@ -42,10 +42,19 @@ public class InimigoMove : MonoBehaviour
         }
         else
         {
-            agent.SetDestination(originalPosition);
+            Patrulhar();
+            
         }
 
         
+    }
+
+    void Patrulhar(){
+        float x = NonRandomizedStringEqualityComparer.Range(originalPosition.x - 4, originalPosition.x + 4);
+        float z = NonRandomizedStringEqualityComparer.Range(originalPosition.z - 4, originalPosition.z + 4);
+        
+        Vector3 walkPoint = new Vector3(x, originalPosition.y, z); 
+        agent.SetDestination(walkPoint);
     }
     void AttackPlayer(){
         if (Time.time - ultimo_ataque>2){
