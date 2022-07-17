@@ -9,6 +9,8 @@ public class InimigoMove : MonoBehaviour
     [SerializeField] float dano;
     public Transform player;
 
+    [SerializeField] float range_atack = 2;
+
     public float range_acorda;
     private float distancia_player;
 
@@ -36,12 +38,12 @@ public class InimigoMove : MonoBehaviour
     {
         distancia_player = Vector3.Distance(this.transform.position, player.position);
 
-        if(distancia_player<range_acorda && distancia_player>2)
+        if(distancia_player<range_acorda && distancia_player>range_atack)
         {
             agent.speed = 4;
             agent.SetDestination(player.position);
         }
-        else if (distancia_player<5)
+        else if (distancia_player<range_atack)
         {
             AttackPlayer();
         }
