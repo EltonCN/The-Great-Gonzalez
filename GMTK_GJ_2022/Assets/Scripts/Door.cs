@@ -11,7 +11,8 @@ public class Door : MonoBehaviour
 
     [SerializeField] bool closed;
 
-    public Transform outra_porta;
+    [SerializeField] Transform porta1;
+    [SerializeField] Transform porta2;
     private Transform porta_tp;
     void Start()
     {
@@ -30,6 +31,10 @@ public class Door : MonoBehaviour
 
     public void Open(int porta)
     {
+        if (porta<=3)
+            porta_tp = porta1;
+        else
+            porta_tp = porta2;
         updateClosed(false);
     }
 
@@ -48,12 +53,12 @@ public class Door : MonoBehaviour
                 
                 if(rb == null)
                 {
-                    other.transform.position = outra_porta.transform.position;
+                    other.transform.position = porta_tp.transform.position;
                     updateClosed(true);
                 }
                 else
                 {
-                    rb.transform.position = outra_porta.transform.position;
+                    rb.transform.position = porta_tp.transform.position;
                 
                     if(rb.tag != "Dice")
                     {
@@ -65,7 +70,6 @@ public class Door : MonoBehaviour
             }
         //}
 
-        porta_tp = outra_porta; 
     }
 
     void updateClosed(bool newClosedState, bool force=false)

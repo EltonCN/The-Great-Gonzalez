@@ -274,7 +274,8 @@ MonoBehaviour:
   closedObject: {fileID: 8371646092859375033}
   openObject: {fileID: 8371646092089105036}
   closed: 1
-  outra_porta: {fileID: 0}
+  porta1: {fileID: 0}
+  porta2: {fileID: 0}
 --- !u!114 &8371646092194539987
 MonoBehaviour:
   m_ObjectHideFlags: 0
