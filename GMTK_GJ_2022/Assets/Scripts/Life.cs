@@ -20,7 +20,7 @@ public class Life : MonoBehaviour
         }        
     }
 
-    public void DecreaseLife(int value)
+    public void DecreaseLife(float value)
     {
         print(value);
         this.life -= value;

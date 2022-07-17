@@ -6,16 +6,17 @@ using UnityEngine.AI;
 public class InimigoMove : MonoBehaviour
 {
     public NavMeshAgent agent;
+    [SerializeField] float dano;
     public Transform player;
 
-    Rigidbody rb;
     public float range_acorda;
-
     private float distancia_player;
+
+    float ultimo_ataque;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        ultimo_ataque = 0;
     }
 
     // Update is called once per frame
@@ -32,6 +33,15 @@ public class InimigoMove : MonoBehaviour
         
     }
     void AttackPlayer(){
+        if (Time.time - ultimo_ataque>2){
+            ultimo_ataque = Time.time;
+            Life player_life = player.GetComponent<Life>();
+            if (player_life!=null){
+                player_life.DecreaseLife(dano);
+            } 
+        }
+        
         agent.SetDestination(this.transform.position);
+        
     }
 }
