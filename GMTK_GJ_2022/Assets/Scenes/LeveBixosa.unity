@@ -2017,6 +2017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 30
   maximumLife: 30
+  syncedVariable: {fileID: 0}
 --- !u!4 &1456871033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1056313530825751709, guid: 53b91c344b511bc46b63442419c45836, type: 3}
@@ -2187,6 +2188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 20
   maximumLife: 20
+  syncedVariable: {fileID: 0}
 --- !u!1 &1573762056
 GameObject:
   m_ObjectHideFlags: 0
