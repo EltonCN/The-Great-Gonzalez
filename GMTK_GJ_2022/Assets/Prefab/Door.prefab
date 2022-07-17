@@ -302,6 +302,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  minimumValue: 0
 --- !u!54 &8371646093644645193
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -98,13 +98,17 @@ public class Dice : MonoBehaviour
         }
 
         Rigidbody rb = other.attachedRigidbody;
-
-        if(rb == null)
+        DiceInteraction di = null;
+        if(rb != null)
         {
-            return;
+            di = rb.GetComponent<DiceInteraction>();
+        }
+        else
+        {
+            di = other.GetComponent<DiceInteraction>();
         }
 
-        DiceInteraction di = rb.GetComponent<DiceInteraction>();
+        
         
         
         if(di == null && this.destroyOnInteraction)
