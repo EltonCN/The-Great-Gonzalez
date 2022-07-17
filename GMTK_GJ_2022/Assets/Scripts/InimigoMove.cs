@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class InimigoMove : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    NavMeshAgent agent;
     [SerializeField] float dano;
     public Transform player;
 
@@ -13,6 +13,7 @@ public class InimigoMove : MonoBehaviour
     private float distancia_player;
 
     float ultimo_ataque;
+    float cooldown_patrulha;
     // Start is called before the first frame update
     Vector3 originalPosition;
 
@@ -20,6 +21,9 @@ public class InimigoMove : MonoBehaviour
     void Start()
     {
         ultimo_ataque = 0;
+        cooldown_patrulha = 0;
+
+        agent = this.gameObject.GetComponent<NavMeshAgent>();
 
         originalPosition = new Vector3();
         originalPosition.x = transform.position.x;
@@ -34,6 +38,7 @@ public class InimigoMove : MonoBehaviour
 
         if(distancia_player<range_acorda && distancia_player>2)
         {
+            agent.speed = 4;
             agent.SetDestination(player.position);
         }
         else if (distancia_player<5)
@@ -50,13 +55,20 @@ public class InimigoMove : MonoBehaviour
     }
 
     void Patrulhar(){
-        float x = NonRandomizedStringEqualityComparer.Range(originalPosition.x - 4, originalPosition.x + 4);
-        float z = NonRandomizedStringEqualityComparer.Range(originalPosition.z - 4, originalPosition.z + 4);
+        if (Time.time - cooldown_patrulha>4){
+            agent = this.gameObject.GetComponent<NavMeshAgent>();
+            agent.speed = 1;
+            cooldown_patrulha = Time.time;
+            float x = Random.Range(originalPosition.x - 8, originalPosition.x + 8);
+            float z = Random.Range(originalPosition.z - 8, originalPosition.z + 8);
+            
+            Vector3 walkPoint = new Vector3(x, originalPosition.y, z); 
+            agent.SetDestination(walkPoint);
+        }
         
-        Vector3 walkPoint = new Vector3(x, originalPosition.y, z); 
-        agent.SetDestination(walkPoint);
     }
     void AttackPlayer(){
+        
         if (Time.time - ultimo_ataque>2){
             ultimo_ataque = Time.time;
             Life player_life = player.GetComponent<Life>();
