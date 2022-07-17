@@ -16,7 +16,7 @@ public class Cartola : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (coelho.active && Time.time - cooldown>1){
+        if (coelho.activeSelf && Time.time - cooldown>1){
             coelho.SetActive(false);
         }
         

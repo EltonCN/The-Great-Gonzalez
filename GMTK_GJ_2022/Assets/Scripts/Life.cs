@@ -6,9 +6,10 @@ public class Life : MonoBehaviour
 {
     [SerializeField] float life;
     [SerializeField] float maximumLife;
+    [SerializeField] FloatVariable syncedVariable;
     void Start()
     {
-        life = maximumLife;
+        LifeValue = maximumLife;
     }
 
     // Update is called once per frame
@@ -20,9 +21,31 @@ public class Life : MonoBehaviour
         }        
     }
 
+    public void DecreaseLifeInt(int value)
+    {
+        DecreaseLife((float) value);
+    }
+
     public void DecreaseLife(float value)
     {
-        print(value);
-        this.life -= value;
+        LifeValue -= value;
+    }
+
+    float LifeValue
+    {
+        set
+        {
+            this.life = value;
+
+            if(syncedVariable != null)
+            {
+                syncedVariable.value = this.life;
+            }
+        }
+
+        get
+        {
+            return this.life;
+        }
     }
 }

@@ -137,7 +137,11 @@ public class Dice : MonoBehaviour
         
         int index = getNumber()-1;
 
-        numberSprites[index].SetActive(true);
+        if(showNumberOnDestroy)
+        {
+            numberSprites[index].SetActive(true);
+        }
+        
 
         yield return new WaitForSeconds(bodyHideDelay);
 
