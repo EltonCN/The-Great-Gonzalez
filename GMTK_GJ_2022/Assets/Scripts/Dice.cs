@@ -40,6 +40,7 @@ public class Dice : MonoBehaviour
         if(destroyOnStop && !moving)
         {
             StartCoroutine(DestroyOnStop());
+            interact = false;
         }
     }
 
@@ -116,12 +117,18 @@ public class Dice : MonoBehaviour
         if(this.destroyOnInteraction)
         {
             StartCoroutine(DestroyOnStop());
+            interact = false;
         }
     
     }
 
     IEnumerator DestroyOnStop()
     {
+        if(!interact)
+        {
+            yield break;
+        }
+
         interact = false;
         
         int index = getNumber()-1;
