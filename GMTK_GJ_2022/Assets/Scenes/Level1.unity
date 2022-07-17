@@ -106,18 +106,18 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 1
+    agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 60
-    agentClimb: 2
-    ledgeDropHeight: 3
-    maxJumpAcrossDistance: 3
-    minRegionArea: 1
+    agentSlope: 33
+    agentClimb: 0.5
+    ledgeDropHeight: 1
+    maxJumpAcrossDistance: 0.75
+    minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.33333334
+    cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 1
+    accuratePlacement: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -677,8 +677,8 @@ GameObject:
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 2
-  m_StaticEditorFlags: 40
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!64 &159750945
 MeshCollider:
@@ -1009,7 +1009,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048762
+  m_Name: pb_Mesh1034752
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1489,7 +1489,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048792
+  m_Name: pb_Mesh1034782
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1883,7 +1883,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048998
+  m_Name: pb_Mesh1034988
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4423,7 +4423,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048852
+  m_Name: pb_Mesh1034842
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5043,8 +5043,8 @@ GameObject:
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 2
-  m_StaticEditorFlags: 40
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &746605049
 MeshCollider:
@@ -5694,7 +5694,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 2
-  m_StaticEditorFlags: 40
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!64 &823266239
 MeshCollider:
@@ -6025,7 +6025,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048888
+  m_Name: pb_Mesh1034878
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6189,7 +6189,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1049012
+  m_Name: pb_Mesh1035002
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6353,7 +6353,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1049058
+  m_Name: pb_Mesh1035048
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7373,7 +7373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 731487616917341466, guid: 308c53f6b5c8bc54ca956b02e79cff84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.368
       objectReference: {fileID: 0}
     - target: {fileID: 731487616917341466, guid: 308c53f6b5c8bc54ca956b02e79cff84, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7423,7 +7423,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048944
+  m_Name: pb_Mesh1034934
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7587,7 +7587,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048840
+  m_Name: pb_Mesh1034830
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7903,7 +7903,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048870
+  m_Name: pb_Mesh1034860
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8067,7 +8067,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048808
+  m_Name: pb_Mesh1034798
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8248,8 +8248,8 @@ GameObject:
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 2
-  m_StaticEditorFlags: 40
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!64 &1757026677
 MeshCollider:
@@ -9155,7 +9155,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1048904
+  m_Name: pb_Mesh1034894
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9914,10 +9914,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Canvas] BasicUI'
       objectReference: {fileID: 0}
-    - target: {fileID: 8279488332317722802, guid: 365e3672acb44b54bbde549d3ebdd072, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8279488332317722806, guid: 365e3672acb44b54bbde549d3ebdd072, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -10001,22 +9997,6 @@ PrefabInstance:
     - target: {fileID: 8279488332317722806, guid: 365e3672acb44b54bbde549d3ebdd072, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279488332597500357, guid: 365e3672acb44b54bbde549d3ebdd072, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279488333535777188, guid: 365e3672acb44b54bbde549d3ebdd072, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279488333630965899, guid: 365e3672acb44b54bbde549d3ebdd072, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279488333837972313, guid: 365e3672acb44b54bbde549d3ebdd072, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 365e3672acb44b54bbde549d3ebdd072, type: 3}

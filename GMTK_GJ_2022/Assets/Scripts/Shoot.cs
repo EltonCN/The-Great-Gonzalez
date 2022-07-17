@@ -10,11 +10,12 @@ public class Shoot : MonoBehaviour
     [SerializeField] float velocity;
     [SerializeField] Rigidbody shooterVelocityReference;
     [SerializeField] bool randomizeRotation = true;
+    [SerializeField] float shootCooldown = 1f;
+    float lastShoot;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        lastShoot = 0f;
     }
 
     // Update is called once per frame
@@ -23,6 +24,7 @@ public class Shoot : MonoBehaviour
         Vector3 direction  = origin.position-Camera.main.transform.position;
         direction.Normalize();
         Debug.DrawRay(origin.position, direction, Color.green);
+
     }
 
     public void shootObject(InputAction.CallbackContext context)
@@ -32,6 +34,12 @@ public class Shoot : MonoBehaviour
         {
             return;
         }
+
+        if(Time.time-lastShoot < shootCooldown)
+        {
+            return;
+        }
+        lastShoot = Time.time;
 
         Quaternion rotation = origin.rotation;
         if(randomizeRotation)
