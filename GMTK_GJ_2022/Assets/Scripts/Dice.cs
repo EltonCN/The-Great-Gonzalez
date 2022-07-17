@@ -16,6 +16,7 @@ public class Dice : MonoBehaviour
     [SerializeField] float destroyDelay = 1.45f;
     [SerializeField] bool showNumberOnDestroy = true;
     
+    [SerializeField] bool explode = false;
     bool interact = true;
     float movingMinimumVelocity2;
 
@@ -97,33 +98,47 @@ public class Dice : MonoBehaviour
             return;
         }
 
-        Rigidbody rb = other.attachedRigidbody;
-        DiceInteraction di = null;
-        if(rb != null)
-        {
-            di = rb.GetComponent<DiceInteraction>();
+        if(explode == true){
+            Explodir();
         }
-        else
-        {
-            di = other.GetComponent<DiceInteraction>();
-        }
+        else{
+            Rigidbody rb = other.attachedRigidbody;
+            DiceInteraction di = null;
+            if(rb != null)
+            {
+                di = rb.GetComponent<DiceInteraction>();
+            }
+            else
+            {
+                di = other.GetComponent<DiceInteraction>();
+            }
 
-        
-        
-        
-        if(di == null && this.destroyOnInteraction)
-        {
-            return;
-        }
+            
+            
+            
+            if(di == null && this.destroyOnInteraction)
+            {
+                return;
+            }
 
-        di.Interact(getNumber());
+            di.Interact(getNumber());
 
-        if(this.destroyOnInteraction)
-        {
-            StartCoroutine(DestroyOnStop());
-            interact = false;
+            if(this.destroyOnInteraction)
+            {
+                StartCoroutine(DestroyOnStop());
+                interact = false;
+            }
         }
     
+    }
+
+    void Explodir(){
+        explode = false;
+        Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 4);
+        foreach (var hitCollider in hitColliders){
+            OnTriggerEnter(hitCollider);
+        }
+
     }
 
     IEnumerator DestroyOnStop()
